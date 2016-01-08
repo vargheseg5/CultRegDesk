@@ -1,0 +1,8 @@
+sudo su - postgres
+
+createdb regdesk
+
+createuser -P regdesk
+    (pw: letitroll)
+
+
