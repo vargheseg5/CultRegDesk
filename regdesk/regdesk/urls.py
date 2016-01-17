@@ -21,5 +21,6 @@ urlpatterns = [
 	url(r'^$', default, name='default'),
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('login.urls', namespace="login")),
+    url(r'^add_event/', include('add_event.urls', namespace="add_event")),
     url(r'^logout/', lo, name='logout')
 ]
