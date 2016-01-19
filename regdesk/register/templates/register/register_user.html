@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<script src="{% static 'bower_components/webcomponentsjs/webcomponents-lite.min.js' %}"></script>
+	<title>.::Candidate Registration::.</title>
+	<link rel="import" href="{% static 'bower_components/polymer/polymer.html' %}">
+	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+	<link rel="import" href="{% static 'bower_components/paper-header-panel/paper-header-panel.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-toolbar/paper-toolbar.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-card/paper-card.html' %}">
+	<link rel="import" href="{% static 'bower_components/iron-flex-layout/classes/iron-flex-layout.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-input/paper-input.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-dropdown-menu/paper-dropdown-menu.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-menu/paper-menu.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-button/paper-button.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-toast/paper-toast.html' %}">
+	<script type="text/javascript">
+			function submitform()
+			{
+				var form = document.getElementById('register_form');
+				var n, c, e, m, g, d, t;
+				t = document.getElementById('toast');
+				n = document.getElementById('name');
+				c = document.getElementById('college');
+				e = document.getElementById('email');
+				m = document.getElementById('phone');
+				g = document.getElementById('gender_send');
+				d = document.getElementById('dob');
+
+				var patt = new RegExp("[0-9]{10}");
+				var re = /\S+@\S+\.\S+/;
+				var dobpatt = new RegExp("[0-9]{4}-[0-1][0-9]-[0-3][0-9]");
+
+				if(n.value == "")
+				{
+					t.text = "Please enter your name";
+					t.open();
+				}
+				else if(c.value == "")
+				{
+					t.text = "Please enter your college name";
+					t.open();
+				}
+				else if(e.value == "")
+				{
+					t.text = "Please enter your email id";
+					t.open();
+				}
+				else if(m.value == "")
+				{
+					t.text = "Please enter your phone number";
+					t.open();
+				}
+				else if(g.value == "" || g.value == "undefined")
+				{
+					t.text = "Please select your gender";
+					t.open();
+				}
+				else if(d.value == "")
+				{
+					t.text = "Please enter your date of birth";
+					t.open();
+				}
+				else if(!patt.test(m.value))
+				{
+					t.text = "Please enter 10 digit mobile number correctly";
+					t.open();
+				}
+				else if(!re.test(e.value))
+				{
+					t.text = "Please enter the correct email address";
+					t.open();
+				}
+				else if(!dobpatt.test(d.value))
+				{
+					t.text = "Please enter the DOB in yyyy-mm-dd format";
+					t.open();
+				}
+				else
+					form.submit();
+			}
+			function select1()
+			{
+				document.getElementById('gender_send').value = "M";
+			}
+			function select2()
+			{
+				document.getElementById('gender_send').value = "F";
+			}
+	</script>
+</head>
+<body class="fullbleed layout vertical">
+
+	<paper-header-panel mode="standard" style="background-color:#B0B0B0;">
+
+
+		<paper-toolbar style="background-color:#5858FA;">
+			<div class="title" style="font-family: 'Nunito', sans-serif;">Register</div>
+		</paper-toolbar>
+
+
+		<div style="margin:10%; margin-top:6%;" class="layout vertical">
+
+			<paper-card heading="Please enter the following details..." style="font-family: 'Nunito', sans-serif;">
+
+				<div class="layout vertical" style="padding:4%;">
+					<form method="POST" action="/register/submit/" id="register_form">
+
+						{% csrf_token %}
+
+						<paper-input label="Full Name" required auto-validate error-message="Please enter your name" name="name" id="name">
+						</paper-input>
+
+						<paper-input label="College" required auto-validate error-message="Please enter your college" name="college" id="college">
+						</paper-input>
+
+						<paper-input label="Email id" required auto-validate error-message="Please enter your email id" name="email" id="email">
+						</paper-input>
+
+						<paper-input label="10 digit mobile number" required auto-validate error-message="Please enter your 10 digit mobile number" name="phone" id="phone" allowed-pattern="[0-9]">
+						</paper-input>
+
+						<paper-dropdown-menu label="Gender" id="gender">
+  							<paper-menu class="dropdown-content">
+    							<paper-item onclick="select1()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-item><br><br>
+   								<paper-item onclick="select2()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Female&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-item>
+  							</paper-menu>
+						</paper-dropdown-menu>
+
+					<input type="hidden" name="gender" id="gender_send" value="undefined">
+
+					<paper-input label="DOB (yyyy-mm-dd)" required auto-validate error-message="Please enter your DOB" name="dob" id="dob" pattern="[0-9]{4}-[0-1][0-9]-[0-3][0-9]">
+					</paper-input>
+
+					<paper-button raised style="background-color: #38B20B; color: #FFFFFF; margin-top: 4%;" onclick="submitform()" type="submit">
+        					submit
+        				</paper-button>
+
+					</form>
+
+				</div>
+
+			</paper-card>
+			<paper-toast id="toast" text="" style="font-family: 'Nunito', sans-serif;"></paper-toast>
+		</div>
+	</paper-header-panel>
+
+</body>
+</html>
