@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<script src="{% static 'bower_components/webcomponentsjs/webcomponents-lite.min.js' %}"></script>
+	<title>.::Cult a Way Registeration::.</title>
+	<link rel="import" href="{% static 'bower_components/polymer/polymer.html' %}">
+	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+	<link rel="import" href="{% static 'bower_components/paper-header-panel/paper-header-panel.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-toolbar/paper-toolbar.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-card/paper-card.html' %}">
+	<link rel="import" href="{% static 'bower_components/iron-flex-layout/classes/iron-flex-layout.html' %}">
+	<link rel="import" href="{% static 'bower_components/paper-button/paper-button.html' %}">
+	<link rel="import" href="{% static 'bower_components/iron-image/iron-image.html' %}">
+
+	<script type="text/javascript">
+
+		function b1press()
+		{
+			window.location.assign("{% url 'add_event:index' %}");
+		}
+
+		function b2press()
+		{
+			window.location.assign("{% url 'login:index' %}");
+		}
+
+		function b3press()
+		{
+			window.location.assign("{% url 'register:index' %}");
+		}
+
+	</script>
+
+</head>
+<body class="fullbleed layout vertical">
+
+	<paper-header-panel mode="standard" style="background-color:#B0B0B0;">
+		<paper-toolbar style="background-color:#5858FA;">
+
+			<div class="title" style="font-family: 'Nunito', sans-serif;">Home</div>
+
+		</paper-toolbar>
+
+		<div style="margin-top:3%; margin-bottom:1%; margin-left:10%; margin-right:10%; " class="layout vertical">
+
+			<paper-card style="font-family: 'Nunito', sans-serif;" elevation="4">
+
+				<div class="layout vertical center-justified" style="padding:4%;">
+
+					<div class="layout horizontal center-justified">
+
+					<iron-image style="width:400px; height:400px; background-color: lightgray;"
+  						sizing="cover" preload fade src=".{% static 'logo/caw16.jpg' %}"></iron-image>
+
+  					</div>
+
+  					<div class="layout horizontal center-justified" style="margin-top: 3%;">
+
+  						<paper-button raised style="background-color: #DF0101; color: #FFFFFF; width: 25%;" onclick="b1press()">
+        					Event Entry
+        				</paper-button>
+
+  						<paper-button raised style="background-color: #2E2EFE; color: #FFFFFF; width: 25%;" onclick="b2press()">
+        					Login
+        				</paper-button>
+
+        				<paper-button raised style="background-color: #38B20B; color: #FFFFFF; width: 25%;" onclick="b3press()">
+        					Participant Registration
+        				</paper-button>
+  						
+  					</div>
+
+				</div>
+
+			</paper-card>
+
+		</div>
+	</paper-header-panel>
+
+</body>
+</html>

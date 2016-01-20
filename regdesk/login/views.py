@@ -42,5 +42,4 @@ def lo(request):
 		return render(request, 'login/message.html', context)
 
 def default(request):
-	context ={'message1':'Message', 'message2':'Home page'}
-	return render(request, 'login/message.html', context)
+	return render(request, 'login/home.html')
