@@ -55,7 +55,11 @@
         </paper-toolbar>
         <div style="margin:20%; margin-top:10%;" class="layout vertical">
         	<paper-card style="font-family: 'Nunito', sans-serif;" heading = "Please login to continue">
+        		{% if redirect_location %}
+        			<form method="POST" action="/login/submit/?loc={{ redirect_location }}" name="login_form" id="login_form">
+        		{% else %}
         		<form method="POST" action="{% url 'login:submit' %}" name="login_form" id="login_form">
+        		{% endif %}
         			<div class="card-content layout vertical" style="padding: 3%;">
         				{% csrf_token %}
         				<paper-input label="Username" required auto-validate error-message="Please enter a username" name="un" id="un">

@@ -1,11 +1,14 @@
 from django.shortcuts import render, HttpResponseRedirect
 from main.models import Event
+from django.contrib.auth.decorators import login_required
 
 # Create your views here
 
+@login_required(login_url='/login/?loc=add_event')
 def index(request):
 	return render(request, 'add_event/event.html')
 
+@login_required(login_url='/login/?loc=add_event')
 def submit(request):
 	if ('name' not in request.POST):
 		context = {'message1':'Error', 'message2':'Please enter an event name'}
