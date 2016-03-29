@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<style is="custom-style">
+ 	 				paper-button.submit {
+ 	 						--paper-button-ink-color: green;
+ 	 				}
+ 	 			</style>
+				<link rel="import" href="{% static 'bower_components/paper-dropdown-menu/paper-dropdown-menu.html' %}">
+				<link rel="import" href="{% static 'bower_components/paper-menu/paper-menu.html' %}">
+				<link rel="import" href="{% static 'bower_components/paper-button/paper-button.html' %}">
+                <div class="layout vertical" style="padding:2%; font-family: 'Nunito', sans-serif;">
+                    <paper-card heading="Event Details" elevation="3" style="padding: 2%; margin-top: 2%;">
+						<div class="card-content layout vertical">
+
+								<paper-dropdown-menu label="Event" id="event">
+  									<paper-menu class="dropdown-content">
+                                     {% for event in events %}
+    								<paper-item onclick="e_select(this)" id="{{event.id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{event.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-item>
+   									{% endfor %}
+  									</paper-menu>
+								</paper-dropdown-menu>
+
+						</div>
+						<div class="card-action">
+							<paper-button class="submit" style="color: green;" onclick="get_event_list()">Submit</paper-button>							
+						</div>
+					</paper-card>
+
+                </div>                

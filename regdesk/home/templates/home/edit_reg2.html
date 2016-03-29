@@ -1,0 +1,23 @@
+                    {% load staticfiles %}					
+                    <style is="custom-style">
+ 	 				paper-button.del {
+ 	 						--paper-button-ink-color: red;
+ 	 				}
+ 	 				paper-button.edit {
+ 	 						--paper-button-ink-color: blue;
+ 	 				}
+ 	 				</style>
+					<link rel="import" href="bower_components/paper-button/paper-button.html">
+ 	 				<div class="layout vertical" style="padding:2%; padding-top:0%; font-family: 'Nunito', sans-serif;">
+                    <input type='hidden' value='{{id}}' id='part_id' onload="{% if confirm %}show_del_confirm(){% endif %}"/>
+                    {% for e in events %}
+
+ 	 					<paper-card heading="{{e.event.name}}" elevation="3" style="padding: 2%; margin-top: 2%">	 			
+	 						<div class="card-action">
+ 	 							<paper-button class="del" style="color: red;" id="{{e.id}}" onclick="event_delete(this)">Delete</paper-button>
+ 	 						</div>
+ 	 					</paper-card>
+
+                    {% endfor %}
+
+ 	 				</div>

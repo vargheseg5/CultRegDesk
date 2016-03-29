@@ -8,11 +8,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 def index(request):
 	if request.user.is_authenticated():
 		if('loc' not in request.GET):
-			context ={'message1':'Message', 'message2':'You have already logged in'}
-			return render(request, 'login/message.html', context)
+			return HttpResponseRedirect(redirect_to='/home/')
 		else:
 			if(request.GET['loc'] == 'add_event'):
 				return HttpResponseRedirect(redirect_to='/add_event/')
+			elif(request.GET['loc'] == 'home'):
+				return HttpResponseRedirect(redirect_to='/home/')
+
 	else:
 		if('loc' not in request.GET):
 			return render(request, 'login/login.html')
@@ -20,15 +22,19 @@ def index(request):
 			if(request.GET['loc'] == 'add_event'):
 				context = {'redirect_location':'add_event'}
 				return render(request, 'login/login.html', context)
+			elif(request.GET['loc'] == 'home'):
+				context = {'redirect_location':'home'}
+				return render(request, 'login/login.html', context)
 
 def submit(request):
 	if request.user.is_authenticated():
 		if('loc' not in request.GET):
-			context ={'message1':'Message', 'message2':'You have already logged in'}
-			return render(request, 'login/message.html', context)
+			return HttpResponseRedirect(redirect_to='/home/')
 		else:
 			if(request.GET['loc'] == 'add_event'):
 				return HttpResponseRedirect(redirect_to='/add_event/')
+			elif(request.GET['loc'] == 'home'):
+				return HttpResponseRedirect(redirect_to='/home/')
 	else:
 		if('un' not in request.POST):
 			context ={'message1':'Message', 'message2':'You have already logged in', 'message3':'/login/', 'message4':'#'}
@@ -40,11 +46,12 @@ def submit(request):
 		if user is not None:
 			login(request, user)
 			if('loc' not in request.GET):
-				context ={'message1':'Message', 'message2':'You have successfully logged in'}
-				return render(request, 'login/message.html', context)
-			else:
-				if(request.GET['loc'] == 'add_event'):
-					return HttpResponseRedirect(redirect_to='/add_event/')	
+				return HttpResponseRedirect(redirect_to='/home/')
+			if(request.GET['loc'] == 'add_event'):
+				return HttpResponseRedirect(redirect_to='/add_event/')
+			elif(request.GET['loc'] == 'home'):
+				return HttpResponseRedirect(redirect_to='/home/')	
+
 		else:
 			context ={'message1':'Message', 'message2':'Username password combo doesnt match', 'message3':'/login/', 'message4':'#'}
 			return render(request, 'login/message.html', context)

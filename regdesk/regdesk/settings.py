@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'login',
     'add_event',
     'register',
+    'home',
 ]
 
 MIDDLEWARE_CLASSES = [

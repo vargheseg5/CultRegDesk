@@ -16,13 +16,14 @@ class Event(models.Model):
 	fee = models.IntegerField(null = True)
 	team = models.NullBooleanField()
 
-class Registration(models.Model):
-	event = models.OneToOneField(Event)
-	user = models.OneToOneField(User)
-
 class Participation(models.Model):
-	participent = models.OneToOneField(Participent)
-	registration = models.OneToOneField(Registration)
+	participent = models.ManyToManyField(Participent, null=True)
+	event = models.ForeignKey(Event, null=True)
+
+class Registration(models.Model):
+	participation = models.ForeignKey(Participation, null=True)
+	user = models.ForeignKey(User, null=True)
+	amount = models.IntegerField(default=0)
 
 class User_detail(models.Model):
 	section = models.CharField(max_length = 5)

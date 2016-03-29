@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<style is="custom-style">
+ 	 				paper-button.submit {
+ 	 						--paper-button-ink-color: green;
+ 	 				}
+ 	 				</style>
+ 	 				<link rel="import" href="{% static 'bower_components/paper-input/paper-input.html' %}">
+ 	 				<link rel="import" href="{% static 'bower_components/paper-button/paper-button.html' %}">
+					<div class="layout vertical" style="padding:2%; font-family: 'Nunito', sans-serif;">
+						<paper-card heading="Participent Details" elevation="3" style="padding: 2%; font">
+							<div class="card-content layout vertical">
+							<form method="POST" action="">
+
+								<div class="layout horizontal">
+								
+								<div class="flex">
+									<paper-input label="Registration Id (Number that follows CAW)" type="number" name="caw_id" id="caw_id_er">
+									</paper-input>
+								</div>
+								<div style="position: relative; top: 10%; color: red;">
+									OR
+								</div>
+								<div class="flex">
+									<paper-input label="Mobile Number" type="number" name="mob_no" id="mob_no_er">
+									</paper-input>
+								</div>
+							</div>
+								
+							</form>
+							</div>
+							<div class="card-action">
+								<paper-button class="submit" style="color: green;" onclick="edit_reg()">Submit</paper-button>	
+							</div>
+						</paper-card>					
+				</div>

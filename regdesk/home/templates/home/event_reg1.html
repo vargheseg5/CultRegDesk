@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<style is="custom-style">
+ 	 				paper-button.submit {
+ 	 						--paper-button-ink-color: green;
+ 	 				}
+ 	 			</style>
+				<link rel="import" href="{% static 'bower_components/paper-dropdown-menu/paper-dropdown-menu.html' %}">
+				<link rel="import" href="{% static 'bower_components/paper-menu/paper-menu.html' %}">
+				<link rel="import" href="{% static 'bower_components/paper-button/paper-button.html' %}">
+				<link rel="import" href="{% static 'bower_components/paper-input/paper-input.html' %}">
+				<div class="layout vertical" style="padding:2%; font-family: 'Nunito', sans-serif;">
+					<paper-card heading="Participent Details" elevation="3" style="padding: 2%;">
+						<div class="card-content layout vertical">
+							<form method="POST" action="">
+
+							<div class="layout horizontal">
+								
+								<div class="flex">
+									<paper-input label="Registration Id (Number that follows CAW)" type="number" name="caw_id" id="caw_id_e1" value="">
+									</paper-input>
+								</div>
+								<div style="position: relative; top: 10%; color: red;">
+									OR
+								</div>
+								<div class="flex">
+									<paper-input label="Mobile Number" type="number" name="mob_no" id="mob_no_e1" value="">
+									</paper-input>
+								</div>
+							</div>
+								
+							</form>
+						</div>
+						
+					</paper-card>
+					<paper-card heading="Event Details" elevation="3" style="padding: 2%; margin-top: 2%;">
+						<div class="card-content layout vertical">
+
+							<form method="POST" action="">
+								<paper-dropdown-menu label="Event" id="event">
+  									<paper-menu class="dropdown-content">
+                                     {% for event in events %}
+    								<paper-item onclick="e_select(this)" id="{{event.id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{event.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-item>
+   									{% endfor %}
+  									</paper-menu>
+								</paper-dropdown-menu>
+
+							</form>
+
+						</div>
+						<div class="card-action">
+							<paper-button class="submit" style="color: green;" onclick="event_reg_confirm1()">Submit</paper-button>							
+						</div>
+					</paper-card>
+
+				</div>

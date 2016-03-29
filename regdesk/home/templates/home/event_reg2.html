@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<style is="custom-style">
+ 	 				paper-button.submit {
+ 	 						--paper-button-ink-color: green;
+ 	 				}
+                    b
+                    {
+                        color:blue;
+                    }
+ 	 			</style>
+ 	 			<link rel="import" href="{% static 'bower_components/paper-button/paper-button.html' %}">
+				<link rel="import" href="bower_components/paper-input/paper-input.html' %}">
+				<div class="layout vertical" style="padding:2%; font-family: 'Nunito', sans-serif;">
+
+					<paper-card heading="Registration Details" elevation="3" style="padding: 2%;">
+						<div class="card-content layout vertical" style="font-size: 120%; font-family: 'Nunito', sans-serif;">
+							<p>
+								Participent Name: <b>{{p.name}}</b>
+							</p>
+							<p>
+								College: <b>{{p.institution}}</b>
+							</p>
+							<p>
+								Gender: <b>{{p.gender}}</b>
+							</p>
+							<p>
+								Number: <b>{{p.phone_no}}</b>
+							</p>
+                            <p>
+								CAW Id: <b>CAW&nbsp;{{p.id}}</b>
+							</p>
+							<p>
+								 Event: <b>{{e.name}}</b>
+							</p>
+                            <input type='hidden' name='event' value='{{e.id}}' id='event'/>
+                            <input type='hidden' name='participent' value='{{p.id}}' id='participent'/>
+                            {% if e.team == True %}
+							<p>
+								 Team member details:
+							</p>
+							<form method="POST" action="">
+                            <input type='hidden' name='min' value='{{e.minimum}}' id='minimum'/>
+                            <input type='hidden' name='max' value='{{e.maximum}}' id='maximum'/>
+                            <input type='hidden' name='team' value='true' id='team'/>
+                            {% for i in range %}
+
+								<div class="layout horizontal">
+								
+									<div class="flex">
+										<paper-input label="Member {{forloop.counter}} Registration Id (Number that follows CAW)" type="number" name="caw_id" id="p{{forloop.counter}}id">
+										</paper-input>
+									</div>
+									<div style="position: relative; top: 10%; color: red;">
+										OR
+									</div>
+									<div class="flex">
+										<paper-input label="Member {{forloop.counter}} Mobile Number" type="number" name="mob_no" id="p{{forloop.counter}}m">
+										</paper-input>
+									</div>
+								</div>
+
+                            {% endfor %}
+
+							</form>
+                             {% else %}
+                                    <input type='hidden' name='team' value='false' id='team'/>
+                            {% endif %}
+						</div>
+						<div class="card-action">
+							<paper-button class="Confirm" style="color: green;" onclick="submit_reg()">Submit</paper-button>							
+						</div>
+					</paper-card>
+
+					
+				</div>

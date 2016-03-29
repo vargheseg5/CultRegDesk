@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^add_event/', include('add_event.urls', namespace="add_event")),
     url(r'^logout/', lo, name='logout'),
     url(r'^register/', include('register.urls', namespace="register")),
+    url(r'^home/', include('home.urls', namespace="home")),
 ]
