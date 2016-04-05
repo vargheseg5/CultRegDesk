@@ -37,7 +37,10 @@ def submit(request):
 	else:
 		maximum = None
 
-	data = Event(name=name, minimum=minimum, maximum=maximum, fee=fee, team=teamFee)
+	if maximum is None and minimum is None:
+		data = Event(name=name, minimum=minimum, maximum=maximum, fee=fee, team=False, teamCollect=teamFee, registration_active=True)
+	else:
+		data = Event(name=name, minimum=minimum, maximum=maximum, fee=fee, team=True, teamCollect=teamFee, registration_active=True)
 	data.save()
 
 	context = {'redirect':'true'}

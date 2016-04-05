@@ -9,16 +9,27 @@ class Participent(models.Model):
 	gender = models.CharField(max_length = 1)
 	dob = models.DateField(auto_now=False, auto_now_add=False)
 
+	def __str__(self):
+		return self.name
+
 class Event(models.Model):
 	name = models.CharField(max_length = 150)
 	minimum = models.IntegerField(null = True)
 	maximum = models.IntegerField(null = True)
 	fee = models.IntegerField(null = True)
 	team = models.NullBooleanField()
+	teamCollect = models.NullBooleanField()
+	registration_active = models.NullBooleanField()
+
+	def __str__(self):
+		return self.name
 
 class Participation(models.Model):
 	participent = models.ManyToManyField(Participent, null=True)
 	event = models.ForeignKey(Event, null=True)
+
+	def __str__(self):
+		return self.event.name
 
 class Registration(models.Model):
 	participation = models.ForeignKey(Participation, null=True)
