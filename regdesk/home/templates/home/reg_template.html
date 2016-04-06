@@ -32,6 +32,7 @@
 	<script>
 
         var e_selected = "", toast;
+        var totalFee;
 		document.addEventListener('WebComponentsReady', function()
 		{
 			m0();
@@ -293,6 +294,25 @@
   			xhttp.send();
 
         }    
+    }
+    function calcAmt(obj)
+    {
+      var max = parseInt(document.getElementById('maximum').value);
+      var f = document.getElementById('feeCollection').value;
+      var fee = parseInt(document.getElementById('fee').value);
+      var i, str, count = 0, str, tot;
+      if(f == "False")
+      {
+        for(i=1; i<=max; i++)
+        {
+          str = 'p'+i;
+          if((document.getElementById(str+'id').value != "") || (document.getElementById(str+'m').value != ""))
+            count++;
+        }
+        tot = (count+1)*fee;
+        totalFee = tot;
+        document.getElementById('feeCol').innerHTML = ''+tot+'';
+      }
     }
 	</script>
 </head>

@@ -24,6 +24,10 @@ def submit(request):
 
 	if ('teamFee' in request.POST):
 		teamFee = request.POST['teamFee']
+		if teamFee == 'true':
+			tf = True
+		else:
+			tf = False
 	else:
 		teamFee = None
 
@@ -38,9 +42,9 @@ def submit(request):
 		maximum = None
 
 	if maximum is None and minimum is None:
-		data = Event(name=name, minimum=minimum, maximum=maximum, fee=fee, team=False, teamCollect=teamFee, registration_active=True)
+		data = Event(name=name, minimum=minimum, maximum=maximum, fee=fee, team=False, teamCollect=tf, registration_active=True)
 	else:
-		data = Event(name=name, minimum=minimum, maximum=maximum, fee=fee, team=True, teamCollect=teamFee, registration_active=True)
+		data = Event(name=name, minimum=minimum, maximum=maximum, fee=fee, team=True, teamCollect=tf, registration_active=True)
 	data.save()
 
 	context = {'redirect':'true'}

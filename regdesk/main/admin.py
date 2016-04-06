@@ -19,4 +19,5 @@ class UserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Participent)
+admin.site.register(Event)
 admin.site.register(Participation)
