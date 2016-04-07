@@ -83,6 +83,10 @@ def event_registration_submit(request):
 		context = {'message1':'Error', 'message2':'No such event exists'}
 		return render(request, 'home/message.html', context)
 
+	if event.registration_active == False:
+		context = {'message1':'Message', 'message2':'Registration for {} has been closed by admin'.format(event.name)}
+		return render(request, 'home/message.html', context)
+
 	members = []
 	if event.team == True:
 		for i in range(1, (event.minimum)):

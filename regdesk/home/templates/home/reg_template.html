@@ -277,22 +277,12 @@
        if (e_selected == "")
        {
             toast.text = "Please select an event";
-			toast.open(); 
+			     toast.open(); 
        }
         else
         {
-            ma = document.getElementById("mainArea");
-			document.getElementById("title").innerHTML = "Event List";
-			ma.innerHTML = "<paper-spinner alt=\"Loading profile info\" active style=\"position:absolute; top:50%; left:50%;\"></paper-spinner>";
-			var xhttp = new XMLHttpRequest();
-  			xhttp.onreadystatechange = function() {
-    		if (xhttp.readyState == 4 && xhttp.status == 200) {
-     			ma.innerHTML = xhttp.responseText;
-    			}
-  			};
-  			xhttp.open("GET", "{% url 'home:get_el' %}?id="+e_selected, true);
-  			xhttp.send();
-
+        var win = window.open("{% url 'home:get_el' %}?id="+e_selected, '_blank');
+        win.focus();
         }    
     }
     function calcAmt(obj)
