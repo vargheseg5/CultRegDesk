@@ -22,6 +22,7 @@ def submit(request):
 	else:
 		fee = request.POST['fee'];
 
+	tf = None
 	if ('teamFee' in request.POST):
 		teamFee = request.POST['teamFee']
 		if teamFee == 'true':
