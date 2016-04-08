@@ -17,7 +17,7 @@ def index(request):
 
 @login_required(login_url='/login/?loc=home')
 def event_registraion_1(request):
-	events = Event.objects.all()
+	events = Event.objects.all().order_by('name')
 	context = {'events':events}
 	return render(request, 'home/event_reg1.html', context)
 
