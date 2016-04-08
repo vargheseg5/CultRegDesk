@@ -215,7 +215,7 @@ def delete_registration(request):
 
 @login_required(login_url='/login/?loc=home')
 def select_event(request):
-	events = Event.objects.all()
+	events = Event.objects.all().order_by('name')
 	context = {'events':events}
 	return render(request, 'home/event_list.html', context)
 
@@ -260,3 +260,34 @@ def get_event_list(request):
 	response = StreamingHttpResponse((writer.writerow(row) for row in ar), content_type="text/csv")
 	response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(event.name)
 	return response
+
+@login_required(login_url='/login/?loc=home')
+def find_participent_1(request):
+	return render(request, 'home/find_participant.html')
+
+@login_required(login_url='/login/?loc=home')
+def submit_participent(request):
+	if 'id' not in request.GET and 'mob_no' not in request.GET:
+		context = {'message1':'Error', 'message2':'Please provide a participent ID or Mobile Number'}
+		return render(request, 'home/message.html', context)
+
+	p = None
+	if 'id' in request.GET:
+		try:
+			p = Participent.objects.get(id=int(request.GET['id'], 10))
+		except Participent.DoesNotExist:
+			context = {'message1':'Error', 'message2':'No such participent exists'}
+			return render(request, 'home/message.html', context)
+	else:
+		try:
+			p = Participent.objects.get(phone_no=int(request.GET['mob_no'], 10))
+		except Participent.DoesNotExist:
+			context = {'message1':'Error', 'message2':'No such participent exists'}
+			return render(request, 'home/message.html', context)
+
+	a = []
+	events = p.participation_set.all().order_by('event')
+	for e in events:
+		a.append(e.event.name)
+	context = {'p':p, 'events':a}
+	return render(request, 'home/find_participant_2.html', context)

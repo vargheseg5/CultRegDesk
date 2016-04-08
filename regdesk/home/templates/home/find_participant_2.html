@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<style is="custom-style">
+ 	 				paper-button.submit {
+ 	 						--paper-button-ink-color: green;
+ 	 				}
+                    b
+                    {
+                        color:blue;
+                    }
+ 	 			</style>
+ 	 			<div class="layout vertical" style="padding:2%; font-family: 'Nunito', sans-serif;">
+ 	 				<paper-card heading="Participent Details" elevation="3" style="padding: 2%;">
+ 	 					<div class="card-content layout vertical" style="font-size: 120%; font-family: 'Nunito', sans-serif;">
+ 	 						<p>
+								Participent Name: <b>{{p.name}}</b>
+							</p>
+							<p>
+								College: <b>{{p.institution}}</b>
+							</p>
+							<p>
+								Gender: <b>{{p.gender}}</b>
+							</p>
+							<p>
+								Number: <b>{{p.phone_no}}</b>
+							</p>
+                            <p>
+								CAW Id: <b>CAW&nbsp;{{p.id}}</b>
+							</p>
+							<p>
+								DOB: <b>{{p.dob}}</b>
+							</p>
+ 	 					</div>
+					</paper-card>
+					<paper-card heading="Registered Events" elevation="3" style="padding: 2%; margin-top: 2%">
+						<div class="card-content layout vertical" style="font-size: 120%; font-family: 'Nunito', sans-serif;">
+							{% for e in events %}
+								<p>
+								<b>{{e}}</b>
+								</p>
+							{% endfor %}
+						</div>
+					</paper-card> 				
+ 	 			</div>
+

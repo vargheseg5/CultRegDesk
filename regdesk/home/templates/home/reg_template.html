@@ -304,6 +304,52 @@
         document.getElementById('feeCol').innerHTML = ''+tot+'';
       }
     }
+    function m3()
+    {
+       ma = document.getElementById("mainArea");
+      document.getElementById("title").innerHTML = "Find Participent";
+      ma.innerHTML = "<paper-spinner alt=\"Loading profile info\" active style=\"position:absolute; top:50%; left:50%;\"></paper-spinner>";
+      var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+          ma.innerHTML = xhttp.responseText;
+          }
+        };
+        xhttp.open("GET", "{% url 'home:f_p' %}", true);
+        xhttp.send();
+    }
+    function findPart1()
+    {
+      var id, m;
+      id = document.getElementById('caw_id_f1');
+      m = document.getElementById('mob_no_f1');
+      if ((id.value == "") && (m.value == ""))
+      {
+        toast.text = "Please enter an id or mobile number";
+        toast.open();
+      }
+      else
+      {
+        ma = document.getElementById("mainArea");
+      document.getElementById("title").innerHTML = "Find Participent";
+      ma.innerHTML = "<paper-spinner alt=\"Loading profile info\" active style=\"position:absolute; top:50%; left:50%;\"></paper-spinner>";
+      var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+          ma.innerHTML = xhttp.responseText;
+          }
+        };
+        if(id.value == "")
+        {
+            xhttp.open("GET", "{% url 'home:s_p' %}?mob_no="+m.value, true);
+        }
+        else
+        {
+          xhttp.open("GET", "{% url 'home:s_p' %}?id="+id.value, true);
+        }
+        xhttp.send();
+      }
+    }
 	</script>
 </head>
 
